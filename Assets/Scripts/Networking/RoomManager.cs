@@ -3,6 +3,22 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
+    public static RoomManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        #region Singleton
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        #endregion
+    }
     void Start()
     {
         Debug.Log("Connecting...");
